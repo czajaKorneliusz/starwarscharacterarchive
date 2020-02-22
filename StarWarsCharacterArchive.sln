@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsCharacterArchive", "StarWarsCharacterArchive\StarWarsCharacterArchive.csproj", "{4CB46DC9-0F1B-48B0-8262-C237F2B37AD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsCharacterArchiveTests1", "StarWarsCharacterArchiveTests1\StarWarsCharacterArchiveTests1.csproj", "{2EE86735-42C2-461A-A639-868343BC84D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CB46DC9-0F1B-48B0-8262-C237F2B37AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CB46DC9-0F1B-48B0-8262-C237F2B37AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CB46DC9-0F1B-48B0-8262-C237F2B37AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CB46DC9-0F1B-48B0-8262-C237F2B37AD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE86735-42C2-461A-A639-868343BC84D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE86735-42C2-461A-A639-868343BC84D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE86735-42C2-461A-A639-868343BC84D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE86735-42C2-461A-A639-868343BC84D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {691E17E3-2FEC-401F-B997-D15E4A50A9CD}
+	EndGlobalSection
+EndGlobal
