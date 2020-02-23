@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-
+using Newtonsoft.Json;
 
 namespace StarWarsCharacterArchive
 {
@@ -20,10 +21,15 @@ namespace StarWarsCharacterArchive
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddJsonOptions(opt =>
+            services.AddDbContext<CharacterContext>(options =>
+      options.UseSqlServer(
+          Configuration.GetConnectionString("MyConnection")));
+
+
+            services.AddControllers().AddNewtonsoftJson(opt =>
             {
-                opt.JsonSerializerOptions.IgnoreNullValues = true;
-                opt.JsonSerializerOptions.WriteIndented = true;
+                opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             }
             );
             services.AddSwaggerGen(opt =>

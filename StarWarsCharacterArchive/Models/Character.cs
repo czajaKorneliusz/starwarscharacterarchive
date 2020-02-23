@@ -1,36 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StarWarsCharacterArchive.Models
 {
-
+    [Table("Character")]
     public class Character
     {
+        [Key]
+        [Required]
         public string Name { get; set; }
-        public List<Episode> Episodes { get; set; }
+        public IEnumerable<string> Episodes { get; set; }
         public string Planet { get; set; }
-        public List<Character> Friends { get; set; }
+        public IEnumerable<string> Friends { get; set; }
 
         public Character()
         {
 
         }
 
-        public Character(string name, List<Episode> episodes, string planet, List<Character> friends)
+        public Character(string name, IEnumerable<string> episodes, string planet, IEnumerable<string> friends)
         {
             Name = name;
             Episodes = episodes;
             Planet = planet;
-            Friends = friends;
-        }
 
-        public enum Episode
-        {
-            [Display(Name = "New Hope")] NEW_HOPE = 4,
-            [Display(Name = "Empire Strikes Back")] EMPIRE = 5,
-            [Display(Name = "Return of the Jedi")] RETURN = 6
+            Friends = friends;
+
         }
     }
-
-
 }
