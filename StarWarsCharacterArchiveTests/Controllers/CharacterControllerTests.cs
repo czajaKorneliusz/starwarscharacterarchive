@@ -28,7 +28,7 @@ namespace StarWarsCharacterArchive.Controllers.Tests
         {
             for (int i = 0; i < length; i++)
             {
-                context.Add(new Character(i.ToString(), new List<string>(new string[] { "One", "Two" }), "planet", new List<string>(new string[] { "LeftFriend", "RightFriend" })));
+                context.Add(new Character(i.ToString(), new List<string>(new string[] { "One", "Two" }), "planet", new List<Friend>(new Friend[] { new Friend { Name = "LeftFriend" }, new Friend { Name="RightFriend" } })));
             }
             context.SaveChanges();
         }
@@ -62,7 +62,7 @@ namespace StarWarsCharacterArchive.Controllers.Tests
         public void GetCharacterByNameTest(string name)
         {
             PopulateDataBase();
-            Character expected = new Character(name, new List<string>(new string[] { "One", "Two" }), "planet", new List<string>(new string[] { "LeftFriend", "RightFriend" }));
+            Character expected = new Character(name, new List<string>(new string[] { "One", "Two" }), "planet", new List<Friend>(new Friend[] { new Friend { Name = "LeftFriend" }, new Friend { Name = "RightFriend" } }));
             context.Add(expected);
             context.SaveChanges();
             Character result = controller.GetCharacterByName(name);
@@ -82,7 +82,7 @@ namespace StarWarsCharacterArchive.Controllers.Tests
         public void CreateNewCharacterTest(string name)
         {
             Assert.IsTrue(context.Characters.Count(x => x.Name == name) == 0);
-            controller.CreateNewCharacter(new Character(name, new List<string>(new string[] { "One", "Two" }), "planet", new List<string>(new string[] { "Left", "Right" })));
+            controller.CreateNewCharacter(new Character(name, new List<string>(new string[] { "One", "Two" }), "planet", new List<Friend>(new Friend[] { new Friend { Name = "LeftFriend" }, new Friend { Name = "RightFriend" } })));
             Assert.IsTrue(context.Characters.Count(x => x.Name == name) == 1);
         }
 
