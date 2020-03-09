@@ -14,6 +14,9 @@ namespace StarWarsCharacterArchive.Models
         public string Planet { get; set; }
         public IEnumerable<string> Friends { get; set; }
 
+
+        public ICollection<Friend> FriendList { get; set; }
+
         public Character()
         {
 
@@ -24,9 +27,8 @@ namespace StarWarsCharacterArchive.Models
             Name = name;
             Episodes = episodes;
             Planet = planet;
-
             Friends = friends;
-
         }
     }
+
 }

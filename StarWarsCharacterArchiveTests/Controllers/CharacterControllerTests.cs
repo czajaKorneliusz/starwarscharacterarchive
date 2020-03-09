@@ -28,31 +28,21 @@ namespace StarWarsCharacterArchive.Controllers.Tests
         {
             for (int i = 0; i < length; i++)
             {
-                context.Add(new Character(i.ToString(), new List<string>(new string[] { "One", "Two" }), "planet", new List<string>(new string[] { "Left", "Right" })));
+                context.Add(new Character(i.ToString(), new List<string>(new string[] { "One", "Two" }), "planet", new List<string>(new string[] { "LeftFriend", "RightFriend" })));
             }
             context.SaveChanges();
         }
 
-
-
-
         [Test()]
         public void DeleteCharacterTest()
         {
-            DbContextOptions<CharacterContext> options = new DbContextOptionsBuilder<CharacterContext>()
-            .UseInMemoryDatabase(databaseName: "StarWarsDatabase")
-            .Options;
-            context = new CharacterContext(options);
-            NullLogger<CharacterController> myLogger = new NullLogger<CharacterController>();
-            controller = new CharacterController(myLogger, context);
-            context.Add(new Character("testName", new List<string>(new string[] { "One", "Two" }), "planet", new List<string>(new string[] { "Left", "Right" })));
-            context.SaveChanges();
-            controller.DeleteCharacter("testName");
-            Assert.IsFalse(context.Characters.Any(x => x.Name == "testName"));
+            PopulateDataBase();
+            Assert.IsTrue(context.Characters.Any(x => x.Name == "0"));
+            controller.DeleteCharacter("0");
+            Assert.IsFalse(context.Characters.Any(x => x.Name == "0"));
         }
 
-
-
+        
         [TearDown]
         public void GlobalTeardown()
         {
@@ -64,7 +54,6 @@ namespace StarWarsCharacterArchive.Controllers.Tests
         [TestCase(0)]
         public void GetAllCharactersTest(int length)
         {
-
             PopulateDataBase(length);
             Assert.AreEqual(length, controller.GetAllCharacters().Count);
         }
@@ -73,12 +62,10 @@ namespace StarWarsCharacterArchive.Controllers.Tests
         public void GetCharacterByNameTest(string name)
         {
             PopulateDataBase();
-            Character expected = new Character(name, new List<string>(new string[] { "One", "Two" }), "planet", new List<string>(new string[] { "Left", "Right" }));
+            Character expected = new Character(name, new List<string>(new string[] { "One", "Two" }), "planet", new List<string>(new string[] { "LeftFriend", "RightFriend" }));
             context.Add(expected);
             context.SaveChanges();
-
             Character result = controller.GetCharacterByName(name);
-
             Assert.AreEqual(expected, result);
         }
 
@@ -87,8 +74,6 @@ namespace StarWarsCharacterArchive.Controllers.Tests
         public void GetCharacterByNameTestWhereNoResults(string name)
         {
             PopulateDataBase();
-
-
             Character result = controller.GetCharacterByName(name);
             Assert.IsTrue(result == null);
         }
@@ -104,11 +89,10 @@ namespace StarWarsCharacterArchive.Controllers.Tests
         [Test()]
         public void UpdateCharacterTest()
         {
-            context.Add(new Character("testName", new List<string>(new string[] { "One", "Two" }), "planet", new List<string>(new string[] { "Left", "Right" })));
-            context.SaveChanges();
-            Character newCharacter = context.Characters.First(x => x.Name == "testName");
+            PopulateDataBase();
+            Character newCharacter = context.Characters.First(x => x.Name == "0");
             newCharacter.Planet = "planet destroyed";
-            controller.UpdateCharacter("testName", newCharacter);
+            controller.UpdateCharacter("0", newCharacter);
             Assert.IsTrue(context.Characters.Count(x => x.Planet == "planet destroyed") == 1);
         }
     }

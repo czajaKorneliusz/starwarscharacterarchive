@@ -12,10 +12,7 @@ namespace StarWarsCharacterArchive.Controllers
     [Produces("application/json")]
     public class CharacterController : ControllerBase
     {
-
         private readonly ILogger<CharacterController> _logger;
-
-
 
         public CharacterController(ILogger<CharacterController> logger, CharacterContext context)
         {
@@ -43,9 +40,17 @@ namespace StarWarsCharacterArchive.Controllers
         [HttpPost]
         public IActionResult CreateNewCharacter(Character character)
         {
-            _context.Add(character);
-            _context.SaveChanges();
-            return NoContent();
+            try
+            {
+                _context.Add(character);
+                _context.SaveChanges();
+            }
+            catch (System.Exception ex)
+            {
+                throw new UserFriendlyException(ex.Message);
+                
+            }
+            return Created(character.Name, new { name = character.Name });
         }
 
         [HttpPut("{name}")]
