@@ -24,7 +24,7 @@ namespace StarWarsCharacterArchive.Controllers.Tests
             controller = new CharacterController(myLogger, context);
         }
 
-        public void PopulateDataBase(int length = 5)
+        private void PopulateDataBase(int length = 5)
         {
             for (int i = 0; i < length; i++)
             {

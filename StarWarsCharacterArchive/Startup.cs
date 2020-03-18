@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace StarWarsCharacterArchive
 {
-    public class Startup
+    class Startup
     {
         public Startup(IConfiguration configuration)
         {
